@@ -21,6 +21,29 @@ std::string correction(std::string exp) {
 			str += i;
 		}
 	}
+	for (size_t i = 0; i < str.size(); i++) {
+		if (str[i] == 'e') {
+			str.replace(i, 1, "2.71828");
+			i += 7;
+		}
+	}
+	for (size_t i = 0; i < str.size(); i++) {
+		if (str[i] == 'x') {
+			flag = true;
+			break;
+		}
+	}
+	if (flag == true) {
+		std::cout << "Please, input x " << std::endl;
+		std::cin >> x;
+		for (size_t i = 0; i < str.size(); i++) {
+			if (str[i] == 'x') {
+				str.replace(i, 1, x);
+				i += x.size();
+			}
+		}
+	}
+	
 	for (auto& i : str) {
 		if (i == ',') {
 			i = '.';
@@ -46,27 +69,6 @@ std::string correction(std::string exp) {
 		if (str[i] == '-' && !isdigit(str[i - 1]) && str[i - 1] != ')') {
 			str.insert(i, "0");
 			i++;
-		}
-	}
-	for (size_t i = 0; i < str.size(); i++) {
-		if (str[i] == 'e') {
-			str.replace(i, 1, "2.71828");
-			i += 7;
-		}
-	}
-	for (size_t i = 0; i < str.size(); i++) {
-		if (str[i] == 'x') {
-			flag = true;
-		}
-	}
-	if (flag == true) {
-		std::cout << "Please, input x " << std::endl;
-		std::cin >> x;
-		for (size_t i = 0; i < str.size(); i++) {
-			if (str[i] == 'x') {
-				str.replace(i, 1, x);
-				i += x.size();
-			}
 		}
 	}
 	return str;
