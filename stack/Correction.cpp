@@ -57,6 +57,35 @@ std::string correction(std::string exp) {
 		std::cerr << "Incorrect input!" << std::endl;
 		exit(0);
 	}
+	
+	std::string buf = "";
+	for (size_t i = 0; i < str.size(); i++) {
+		if (isalpha(str[i]) && str[i] != 'x' && str[i] != 'e') {
+			buf += str[i];
+
+		}
+		else
+		{
+			if (!isalpha(str[i]) || str[i] == 'x' && str[i] == 'e' || str[i] == '(' || str[i] == ')') {
+				if (buf == "sin" || buf == "cos" || buf == "tan" || buf == "cot") {
+					buf.clear();
+					continue;
+					
+				}
+				else if (buf.empty()) {
+					buf.clear();
+					continue;
+					
+				}
+				
+				else {
+					std::cerr << "Error!" << std::endl;
+					exit(0);
+				}
+				
+			}
+		}
+	}
 	for (size_t i = 1; i < str.size(); i++) {
 		if ((str[i-1] == 'i' && str[i] == 'n' && str[i + 1] != '(') || (str[i - 1] == 'o' && str[i] == 's' && str[i + 1] 
 			!= '(') || (str[i - 1] == 'o' && str[i] == 't' && str[i + 1] != '(') || 
